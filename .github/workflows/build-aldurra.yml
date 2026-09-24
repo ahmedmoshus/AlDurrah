@@ -6,6 +6,7 @@ on:
     branches: [ "main" ]
     paths:
       - "Aldurra_V2_BuildKit.part-*"
+      - ".github/workflows/build-aldurra.yml"
 
 permissions:
   contents: read
@@ -40,9 +41,6 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
 
       - name: Install Android 16 SDK
         shell: bash
