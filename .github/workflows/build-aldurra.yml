@@ -5,7 +5,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - "Aldurra_V2_No_Android_Studio_Build_Kit.zip"
+      - "Aldurra_V2_BuildKit.part-*"
 
 permissions:
   contents: read
@@ -18,13 +18,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify uploaded build kit
+      - name: Reassemble build kit
         shell: bash
         run: |
-          test -f Aldurra_V2_No_Android_Studio_Build_Kit.zip || {
-            echo "Upload Aldurra_V2_No_Android_Studio_Build_Kit.zip to repository root first."
-            exit 1
-          }
+          test -f Aldurra_V2_BuildKit.part-00
+          test -f Aldurra_V2_BuildKit.part-01
+          cat Aldurra_V2_BuildKit.part-* > Aldurra_V2_No_Android_Studio_Build_Kit.zip
+          echo "3a26f41a89a8059afe682a1990a4d285fe4252b141f32dde19a777ad445d703b  Aldurra_V2_No_Android_Studio_Build_Kit.zip" | sha256sum -c -
 
       - name: Extract Aldurra source
         shell: bash
